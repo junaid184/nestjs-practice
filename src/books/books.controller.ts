@@ -35,7 +35,7 @@ export class BooksController {
   @Patch(':id')
   update(
     @Param('id', new ParseUUIDPipe()) id: string,
-    @Body() updateBookDto: UpdateBookDto,
+    @Body(new ValidationPipe()) updateBookDto: UpdateBookDto,
   ) {
     return this.booksService.update(id, updateBookDto);
   }
