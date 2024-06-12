@@ -18,7 +18,7 @@ export class BooksService {
   }
 
   findOne(id: string): CreateBookDto {
-    const book = this.books.find(book => book.id === id);
+    const book = this.books.find((book) => book.id === id);
     if (!book) {
       throw new NotFoundException(`Book with id ${id} not found.`);
     }
@@ -26,7 +26,7 @@ export class BooksService {
   }
 
   update(id: string, updateBookDto: UpdateBookDto): string {
-    const index = this.books.findIndex(book => book.id === id);
+    const index = this.books.findIndex((book) => book.id === id);
     if (index === -1) {
       throw new NotFoundException(`Book with id ${id} not found.`);
     }
@@ -35,7 +35,7 @@ export class BooksService {
   }
 
   remove(id: string): string {
-    const index = this.books.findIndex(book => book.id === id);
+    const index = this.books.findIndex((book) => book.id === id);
     if (index === -1) {
       throw new NotFoundException(`Book with id ${id} not found.`);
     }

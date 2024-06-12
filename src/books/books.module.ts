@@ -7,8 +7,8 @@ import { BooksMiddleware } from './books.middleware';
   controllers: [BooksController],
   providers: [BooksService],
 })
-export class BooksModule implements NestModule{
+export class BooksModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(BooksMiddleware).forRoutes("books")
+    consumer.apply(BooksMiddleware).forRoutes('books');
   }
 }

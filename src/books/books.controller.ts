@@ -1,9 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ValidationPipe, ParseUUIDPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  ValidationPipe,
+  ParseUUIDPipe,
+} from '@nestjs/common';
 import { BooksService } from './books.service';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
-import { BooksPipe } from './books.pipe';
-import { Validator } from 'class-validator';
 
 @Controller('books')
 export class BooksController {
@@ -25,7 +33,10 @@ export class BooksController {
   }
 
   @Patch(':id')
-  update(@Param('id', new ParseUUIDPipe()) id: string, @Body() updateBookDto: UpdateBookDto) {
+  update(
+    @Param('id', new ParseUUIDPipe()) id: string,
+    @Body() updateBookDto: UpdateBookDto,
+  ) {
     return this.booksService.update(id, updateBookDto);
   }
 

@@ -1,7 +1,6 @@
 import { IsNotEmpty, IsString, IsDateString, IsUUID } from 'class-validator';
 
 export class CreateBookDto {
-
   @IsNotEmpty()
   @IsString()
   title: string;
@@ -15,6 +14,6 @@ export class CreateBookDto {
   published: Date;
 }
 export class BookDto extends CreateBookDto {
-    @IsUUID()
-    id: string;
-  }
+  @IsUUID()
+  id: string;
+}

@@ -3,12 +3,11 @@ import { BooksModule } from './books/books.module';
 @Module({
   imports: [BooksModule],
   controllers: [],
-  providers: [ ],
-  exports:[]
+  providers: [],
+  exports: [],
 })
 export class RootModule {
-  constructor()
-  {
-    console.log('Root Module')
+  constructor() {
+    console.log('Root Module');
   }
 }
