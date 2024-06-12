@@ -1,29 +1,36 @@
-import { Controller, Post, Get, Delete, Put, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ValidationPipe, ParseUUIDPipe } from '@nestjs/common';
 import { BooksService } from './books.service';
+import { CreateBookDto } from './dto/create-book.dto';
+import { UpdateBookDto } from './dto/update-book.dto';
+import { BooksPipe } from './books.pipe';
+import { Validator } from 'class-validator';
 
-@Controller('books')  //http://localhost:3000/books
+@Controller('books')
 export class BooksController {
-   constructor(private bookService: BooksService)
-   {
-    
-   }
-  @Post('/addBook')
-  addBook(): string {
-   return this.addBook();
+  constructor(private readonly booksService: BooksService) {}
+
+  @Post()
+  create(@Body(new ValidationPipe()) createBookDto: CreateBookDto) {
+    return this.booksService.create(createBookDto);
   }
-  //http://localhost:3000/books/getAllBooks
-  @Get('/getAllBooks')
-  getBook(): string {
-    return this.getBook();
+
+  @Get()
+  findAll() {
+    return this.booksService.findAll();
   }
-  //http://localhost:3000/books/deleteBook/:id
-  @Delete('/deleteBook/:id')
-  deleteBook(@Param() params): string {
-    return this.deleteBook(params.id);
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.booksService.findOne(id);
   }
-  //http://localhost:3000/books/updateBook/:id
-  @Put('/updateBook/:id')
-  updateBook(@Param() params): string {
-    return this.updateBook(params.id);
+
+  @Patch(':id')
+  update(@Param('id', new ParseUUIDPipe()) id: string, @Body() updateBookDto: UpdateBookDto) {
+    return this.booksService.update(id, updateBookDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id', new ParseUUIDPipe()) id: string) {
+    return this.booksService.remove(id);
   }
 }
